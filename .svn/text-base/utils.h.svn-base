@@ -1,6 +1,0 @@
-#include <stdio.h>
-#include "struct.h"
-
-void clearRam(duom *machine, int x);
-void clearReg(duom *machine, int x);
-void fileToRam(duom *machine, char *file);
