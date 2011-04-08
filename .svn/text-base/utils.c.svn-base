@@ -1,0 +1,65 @@
+#include "utils.h"
+
+void clearRam(duom *machine, int x)
+{
+	int i;
+	for(i = 0; i < 256; i++)
+	{
+		machine->ram[i] = x;
+	}
+}
+
+void clearReg(duom *machine, int x)
+{
+	machine->AX = x;
+	machine->BX = x;
+	machine->IP = x;
+	machine->SF = x;
+	machine->PTR = x;
+	machine->PI = x;
+	machine->SI = x;
+	machine->TI = x;
+	machine->MODE = x;
+	machine->CN1 = x;
+	machine->CN2 = x;
+	machine->CN3 = x;
+	machine->IOI = x;
+}
+
+char fileToRam(duom *machine,char *file)
+{
+	int *ram = machine->ram;
+	FILE *fp;
+	int byte;
+	char line[10];
+	fp = fopen(file, "rb");
+	if (fp == NULL)
+		return 0;
+
+	/*while ((byte = getc(fp))!=EOF)
+	{
+		if (byte!="\n")
+		{
+			ram[ramOffset] = byte;
+			ramOffset++;
+		}
+	}
+	*/
+	
+	while(fgets(line, 10, fp) != NULL)
+    {
+		char c1=0,c2=0,c3=0,c4=0;
+		int pos;
+		int elem1 = 0, elem2 = 0;
+		sscanf (line, "%d=%c%c%c%c", &pos, &c1,&c2,&c3,&c4);
+		
+		elem1 |= atoi(&c1)<<4;
+		elem1 |= atoi(&c2);
+		elem2 |= atoi(&c3)<<4;
+		elem2 |= atoi(&c4);
+
+		ram[pos] = elem1;
+		ram[pos+1] = elem2;
+	}
+	
+}

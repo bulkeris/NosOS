@@ -1,0 +1,6 @@
+#pragma once
+
+typedef struct {
+	int ram[256];
+	int AX, BX, IP, SF, PTR, PI, SI, TI, MODE, CN1, CN2, CN3, IOI;
+} duom;

@@ -1,0 +1,29 @@
+#include "main.h"
+
+int main()
+{
+	int i;
+	duom *realmachine, *virtualmachine;
+	realmachine = malloc(sizeof(duom));
+	virtualmachine = malloc(sizeof(duom));
+
+
+	SetConsoleTitle(LTITLE);
+			clearReg(realmachine, 0);
+			clearReg(virtualmachine, 0);
+			clearRam(realmachine, 0);
+			clearRam(virtualmachine, 0);	
+	fileToRam(realmachine, HDDFILE);
+
+	while(1)
+	{
+		for(i = 0; i < 20; i++)
+		{
+
+			draw(realmachine, virtualmachine);
+		}
+	}
+	getchar();
+
+	return 0;
+}
